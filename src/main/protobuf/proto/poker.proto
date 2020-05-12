@@ -1,0 +1,45 @@
+syntax="proto3";
+// 协议号范围 [400,500)
+package messages;
+option java_package = "com.xxicon.poker.message";
+option java_multiple_files = true;
+
+// 发牌
+message C0400_PokerSendResp {
+    repeated int32 pokers = 1;  // 牌 0-51
+    int32 first = 2;  // 第一个出牌位置（房间位置）
+}
+
+// 开牌PK
+message C0401_PokerBattleReq {
+    int32 rival = 1;  // 开牌对手
+}
+
+message C0401_PokerBattleResp {
+    int32 loser = 1;
+    int32 turn = 2;
+}
+
+// 压钱（加投钱）
+message C0402_PokerInvestMoneyReq {
+    int32 money = 1;
+}
+
+message C0402_PokerInvestMoneyResp {
+    int32 money = 1;
+    int32 turn = 2;
+}
+
+// 认输
+message C0403_PokerAdmitDefeatReq {
+}
+
+message C0403_PokerAdmitDefeatResp {
+    int32 loser = 1;
+    int32 turn = 2;
+}
+
+// 结束
+message C0404_PokerGameOverResp {
+    int32 victor = 1;
+}

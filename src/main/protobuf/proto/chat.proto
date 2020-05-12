@@ -1,0 +1,30 @@
+syntax="proto3";
+// 协议号范围 [200,300)
+package messages;
+option java_package = "com.xxicon.poker.message";
+option java_multiple_files = true;
+
+message ChatInfo {
+    int32 roleId = 1;
+    string roleName = 2;
+    int32 roleLevel = 3;
+    string content = 4;  // 聊天内容
+}
+
+// 聊天消息同步
+message C0200_ChatNewsResp {
+    int32 channel = 1;	//频道 0=系统, 1=私聊, 2=房间, 3=世界
+    ChatInfo info = 2;
+}
+
+// 发送消息
+message C0201_ChatSendReq {
+    int32 channel = 1;	//频道
+    string content = 2;  // 内容
+    string target = 3;  // 目标： 私聊频道为角色ID，房间频道为房间号
+}
+
+message C0201_ChatSendResp {
+    int32 code = 1;
+    string msg = 2;
+}

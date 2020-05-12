@@ -1,0 +1,66 @@
+syntax="proto3";
+// 协议号范围 [100,200)
+package messages;
+option java_package = "com.xxicon.poker.message";
+option java_multiple_files = true;
+
+// 用户登录
+message C0101_UserLoginReq {
+    string token = 1;
+}
+
+message C0101_UserLoginResp {
+    int32 code = 1;
+    string msg = 2;
+    string session = 3;  // wss会话
+    int32 roleId = 4;  // 角色ID
+}
+
+// 登录重连
+message C0102_ReconnectReq {
+    string session = 1;
+}
+
+message C0102_ReconnectResp {
+    int32 code = 1;
+    string msg = 2;
+    string session = 3;  // 新wss会话
+    int32 roleId = 4;  // 角色ID
+}
+
+message RoleInfo {
+    int32 roleId = 1;  // 角色ID
+    string roleName = 2;  // 角色名
+    int32 gender = 3;  // 性别 0=女, 1=男
+    int32 level = 4;  // 等级
+    int32 money = 5;  // 金钱数
+}
+
+// 角色注册
+message C0105_RoleRegisterReq {
+    string roleName = 1;  // 角色名
+    int32 gender = 2;  // 性别 0=女, 1=男
+}
+
+message C0105_RoleRegisterResp {
+    int32 code = 1;
+    string msg = 2;
+    RoleInfo info = 3;
+}
+
+// 角色登录
+message C0106_RoleLoginReq {
+    int32 roleId = 1;
+}
+
+message C0106_RoleLoginResp {
+    int32 code = 1;
+    string msg = 2;
+    RoleInfo info = 3;
+}
+
+// 角色属性变化通知
+message C0120_RoleAttributeResp {
+    int32 level = 1;  // 等级
+    int32 money = 2;  // 金钱数
+}

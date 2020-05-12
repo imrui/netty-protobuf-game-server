@@ -1,0 +1,88 @@
+syntax="proto3";
+// 协议号范围 [300,400)
+package messages;
+option java_package = "com.xxicon.poker.message";
+option java_multiple_files = true;
+
+message RoomRoleInfo {
+    int32 index = 1;  // 房间位置
+    int32 roleId = 2;
+    string roleName = 3;
+    int32 roleLevel = 4;
+    int32 isReady = 5;
+}
+
+// 房间状态同步
+message C0300_RoomSyncResp {
+    int32 ownerId = 1;  // 房主角色ID
+    int32 roomId = 2;
+    repeated RoomRoleInfo infos = 3;  // 房间角色
+}
+
+// 自动匹配
+message C0301_RoomMatchReq {
+}
+
+// 进入房间
+message C0302_RoomEnterReq {
+    int32 roomId = 1;  // 房间号
+    string password = 2;  // 房间密码
+}
+
+message C0302_RoomEnterResp {
+    RoomRoleInfo role = 1;  // 房间角色
+}
+
+// 创建房间
+message C0303_RoomCreateReq {
+    string password = 1;  // 房间密码
+}
+
+// 离开房间
+message C0304_RoomLeaveReq {
+}
+
+message C0304_RoomLeaveResp {
+    int32 roleId = 1;
+}
+
+// 更换房间/重新匹配
+message C0305_RoomReMatchReq {
+}
+
+// 踢人
+message C0306_RoomKickReq {
+    int32 roleId = 1;
+}
+
+message C0306_RoomKickResp {
+    int32 roleId = 1;
+}
+
+// 准备
+message C0310_RoomStateReadyReq {
+}
+
+message C0310_RoomStateReadyResp {
+    int32 roleId = 1;
+}
+
+// 取消准备
+message C0311_RoomStateCancelReq {
+}
+
+message C0311_RoomStateCancelResp {
+    int32 roleId = 1;
+}
+
+// 开始
+message C0312_RoomStateGoReq {
+}
+
+message C0312_RoomStateGoResp {
+}
+
+message C0313_RoomRoleSyncResp {
+    int32 ownerId = 1;  // 房主角色ID
+    RoomRoleInfo roleInfo = 2;  // 房间角色
+}
