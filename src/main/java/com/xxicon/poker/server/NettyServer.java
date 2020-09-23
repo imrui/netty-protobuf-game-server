@@ -21,7 +21,7 @@ public class NettyServer {
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
     private ChannelFuture channelFuture;
-    @Value("${server.port}")
+    @Value("${websocket.port}")
     private int port;
     private final WebSocketServerInitializer webSocketServerInitializer;
 
